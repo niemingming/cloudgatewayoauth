@@ -1,0 +1,39 @@
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: oauth
+          uri: http://localhost:8080
+          metadata:
+            response-timeout: 3000
+            connect-timeout: 1000
+          predicates:
+            - Path=/api/login
+          filters:
+            - RewritePath=/api/login,/oauth/token #路径重写
+            - AddRequestParameter=grant_type,password #追加参数鉴权类型密码认证
+            - AddRequestParameter=client_id,oauthclient
+            - AddRequestParameter=client_secret,oauthsecret
+        - id: basic
+          uri: http://localhost:8080
+          metadata:
+            response-timeout: 3000
+            connect-timeout: 1000
+          predicates:
+            - Path=/api/basic/**
+          filters:
+            - RewritePath=/api/basic/(?<segment>.*), /$\{segment} #路径重写
+      httpclient:
+        pool:
+          name: gateway
+          type: elastic
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          jwk-set-uri: http://localhost:8080/oauth/token_key  #如果我们jwt采用的是RSA算法加密，需要配置该项，用于获取公钥做解密
+encrypt:
+  key: abcdefgh12345678abcdefgh12345678  #配置一样的key就不需要访问获取了。
+server:
+  port: 8000

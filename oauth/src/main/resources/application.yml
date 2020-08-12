@@ -1,0 +1,19 @@
+
+#安全认证配置
+security:
+  oauth2:
+    client:
+      client-id: oauthclient #配置生成token客户端id
+      client-secret: oauthsecret #配置密钥
+      authorized-grant-types: password,code  #配置认证校验方式，支持authorization_code", "password", "client_credentials", "implicit", "refresh_token" 其中password是用户名密码形式，我们可以配置authorizationManager
+      access-token-validity-seconds: 3600 #token有效期
+      refresh-token-validity-seconds: 36000 #刷新token有效期
+      scope: nmm-oauth  #配置作用域
+#密钥配置
+encrypt:
+  key: abcdefgh12345678abcdefgh12345678   #配置HMACSHA256s算法密钥
+#  key-store:  #配置rsa密钥作为token生成密钥时的配置
+#    alias: rasstore
+#    password: 123456
+#    location: D:/jwt.jks
+#    secret: oauth
