@@ -249,6 +249,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 配置安全策略
+     * 更正说明，oauth2的情况下，我们设置了AuthorizationServerSecurityConfigurer.tokenKeyAccess为permitAll()就是指oauth2相关不在鉴权。这里不用配置了。
      * @param http
      * @throws Exception
      */
@@ -321,3 +322,11 @@ username:
 password:
 grant_type:password
 如果有自定义逻辑自行添加
+
+
+### 10、关于oauth2设置为authorization_code模式，也就是授权码模式的问题
+
+首先我们要理解，授权码模式接受权限校验是正常的，因此会返回403。网上很多例子说是会跳转到登录页面，我们没有跳转。
+是因为我们在HttpSecurity里面没有配置FormLogin。也就是说，在鉴权不通过时，默认是返回响应码的。我们配置了formLogin才会跳转。
+
+
