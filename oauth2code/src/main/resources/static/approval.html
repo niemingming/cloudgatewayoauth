@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>授权页面</title>
+</head>
+<body>
+    <form action="/oauth/authorize" method="post">
+        <input type="hidden" name="user_oauth_approval" value="true"/>
+        <input type="submit" value="同意"/>
+    </form>
+    <form action="/oauth/authorize" method="post">
+        <input type="hidden" name="user_oauth_approval" value="false"/>
+        <input type="submit" value="拒绝"/>
+    </form>
+</body>
+</html>

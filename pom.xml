@@ -11,6 +11,8 @@
     <modules>
         <module>oauth</module>
         <module>gateway</module>
+        <module>oauth2code</module>
+        <module>ClientOne</module>
     </modules>
     <properties>
         <spring.cloud.version>Hoxton.SR6</spring.cloud.version>

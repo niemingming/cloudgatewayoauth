@@ -1,0 +1,14 @@
+security:
+  oauth2:
+    authorization:
+      #配置oauth的鉴权策略，我们也可以在配置类中设置。
+      token-key-access: permitAll()
+      check-token-access: isAuthenticated()
+server:
+  port: 8000
+spring:
+  mvc:
+    static-path-pattern: /**
+  resources:
+    static-locations: classpath:/static/
+#配置静态资源
